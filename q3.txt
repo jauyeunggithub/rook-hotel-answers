@@ -1,0 +1,12 @@
+const fs = require('fs')
+fs.readFile('./foo.txt', (err, file) => {
+  const rows = file.toString().trim().split('\n')
+  let total = 0
+  for (const r of rows) {
+    const [, , val] = r.split(',')
+    if (!isNaN(+val)) {
+      total += +val
+    }
+  }
+  console.log(total)
+})

@@ -1,0 +1,42 @@
+import * as React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import Constants from 'expo-constants';
+
+// You can import from local files
+import { useState, useEffect } from 'react';
+import { Card } from 'react-native-paper';
+import { TextInput, Button } from "react-native";
+
+
+export default function App() {
+  const [data, setData] = useState({});
+  const [query, setQuery] = useState('');
+
+  const getWeather = async () => {
+    const res = await fetch(`https://www.metaweather.com/api/location/search/?query=${query}`);
+    const [{woeid}] = await res.json();
+    const resWeather = await fetch(`https://www.metaweather.com/api/location/${woeid}`);
+    const d = await resWeather.json();
+    setData(d);
+  };
+
+  return (
+    <View style={styles.container}>
+      <TextInput value={query} onChange={e => setQuery(e.target.value)} placeholder='Type Location to Search' />
+      <Button title='Search' onPress={getWeather} />      
+      <Card>
+        {JSON.stringify(data)}
+      </Card>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: '#ecf0f1',
+    padding: 8,
+  },
+});

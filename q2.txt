@@ -1,0 +1,13 @@
+const numFn = (num) => {
+  if (num % 14 === 0) {
+    console.log('foobar')
+    return
+  } else if (num % 7 === 0) {
+    console.log('foo')
+    return
+  } else if (num % 2 === 0) {
+    console.log('bar')
+    return
+  }
+  console.log('NUMBER')
+}

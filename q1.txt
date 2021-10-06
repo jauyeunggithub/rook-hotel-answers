@@ -1,0 +1,23 @@
+const rooms = [
+  { room_type: "Queen", vacant_rooms: 5, price: 100 },
+  { room_type: "Double", vacant_rooms: 3, price: 75 },
+  { room_type: "Twin", vacant_rooms: 8, price: 60 }
+];
+
+const Rooms = ({ rooms }) => {
+  return (
+    <ol>
+      {rooms.map((r) => {
+        const { room_type, vacant_rooms, price } = r;
+        return (
+          <li>
+            {room_type}, {vacant_rooms}, ${price}
+          </li>
+        );
+      })}
+    </ol>
+  );
+};
+export default function App() {
+  return <Rooms rooms={rooms} />;
+}
